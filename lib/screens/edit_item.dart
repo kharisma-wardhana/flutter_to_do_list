@@ -8,6 +8,13 @@ class EditItem extends StatefulWidget {
 class _EditItemState extends State<EditItem> {
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return Scaffold(
+      appBar: AppBar(
+        title: Text("Edit Item"),
+      ),
+      body: Column(
+        children: <Widget>[Center(child: Text("Edit Item"))],
+      ),
+    );
   }
 }

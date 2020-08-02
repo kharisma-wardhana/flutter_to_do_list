@@ -10,7 +10,11 @@ class ListItem extends StatefulWidget {
 class _ListItemState extends State<ListItem> {
   List<Widget> todos = [];
 
-  _ListItemState() {}
+  _ListItemState() {
+    todos.add(Text("Checklist1"));
+    todos.add(Text("Checklist2"));
+    todos.add(Text("Checklist3"));
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -18,38 +22,61 @@ class _ListItemState extends State<ListItem> {
       appBar: AppBar(
         title: Text("To Do List"),
       ),
-      body: Row(
-        children: <Widget>[
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: <Widget>[
-              RaisedButton(
-                child: Text("Add Task"),
-                onPressed: () {
-                  Navigator.push(context, MaterialPageRoute(builder: (context) {
-                    return AddItem();
-                  }));
-                },
-              ),
-              RaisedButton(
-                child: Text("Edit Task"),
-                onPressed: () {
-                  Navigator.push(context, MaterialPageRoute(builder: (context) {
-                    return EditItem();
-                  }));
-                },
-              )
-            ],
-          ),
-          ListView(
-            children: <Widget>[
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
+      body: SafeArea(
+        child: Column(
+          children: <Widget>[
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: <Widget>[
+                RaisedButton(
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(20),
+                      side: BorderSide(color: Color(0xFFF55D3E))),
+                  color: Color(0xFFFFFFFF),
+                  child: Text(
+                    "Add Task",
+                    style: TextStyle(
+                        color: Color(0xFFF55D3E),
+                        letterSpacing: 1.2,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 16),
+                  ),
+                  onPressed: () {
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) {
+                      return AddItem();
+                    }));
+                  },
+                ),
+                RaisedButton(
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(20),
+                      side: BorderSide(color: Color(0xFFF55D3E))),
+                  color: Color(0xFFFFFFFF),
+                  child: Text(
+                    "Edit Task",
+                    style: TextStyle(
+                        color: Color(0xFFF55D3E),
+                        letterSpacing: 1.2,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 16),
+                  ),
+                  onPressed: () {
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) {
+                      return EditItem();
+                    }));
+                  },
+                )
+              ],
+            ),
+            Expanded(
+              child: ListView(
                 children: todos,
-              )
-            ],
-          ),
-        ],
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
