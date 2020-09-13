@@ -1,7 +1,7 @@
 # FlutterPomodoroToDo
 Pomodoro and ToDo Flutter App 
 
-# Feature
+## Feature
 <ul>
 <li>Onboarding screen system that only appear after fresh install</li>
 <li>Dismissable item list </li>
@@ -10,7 +10,7 @@ Pomodoro and ToDo Flutter App
 <li>Firebase Firestore as a realtime database</li>
 </ul>
 
-# Android Preview
+## Android Preview
 <table>
    <tr>
      <td>Task List Screen</td>
