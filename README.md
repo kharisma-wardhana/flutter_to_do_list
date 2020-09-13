@@ -1,6 +1,30 @@
-# dicoding_todo
+# FlutterPomodoroToDo
+Pomodoro and ToDo Flutter App 
 
-A new Flutter project.
+# Feature
+<ul>
+<li>Onboarding screen system that only appear after fresh install</li>
+<li>Dismissable item list </li>
+<li>Add item to list </li>
+<li>Edit item in list</li>
+<li>Firebase Firestore as a realtime database</li>
+</ul>
+
+# Android Preview
+<table>
+   <tr>
+     <td>Task List Screen</td>
+     <td>Add Task to List</td>
+     <td>Timer Screen</td>
+     <td>Timer Screen Countdown</td>
+  </tr>
+  <tr>
+      <td><img src="https://raw.githubusercontent.com/kharisma-wardhana/flutter_to_do_list/master/img/pomodoro_a1.jpg" width="160"></td>
+      <td><img src="https://raw.githubusercontent.com/kharisma-wardhana/flutter_to_do_list/master/img/pomodoro_a2.jpg" width="160"></td>
+      <td><img src="https://raw.githubusercontent.com/kharisma-wardhana/flutter_to_do_list/master/img/pomodoro_b1.jpg" width="160"></td>
+      <td><img src="https://raw.githubusercontent.com/kharisma-wardhana/flutter_to_do_list/master/img/pomodoro_b2.jpg" width="160"></td>
+  </tr>
+</table>
 
 ## Getting Started
 
