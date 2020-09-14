@@ -38,7 +38,6 @@ class MyApp extends StatelessWidget {
   Future<bool> checkFirstOpen() async {
     // init firebase app
     FirebaseApp app = await Firebase.initializeApp();
-    print('init firebase app $app');
 
     // check sharedpreference
     SharedPreferences prefs = await SharedPreferences.getInstance();
@@ -50,7 +49,6 @@ class MyApp extends StatelessWidget {
       future: checkFirstOpen(),
       builder: (BuildContext ctx, AsyncSnapshot<bool> snapshot) {
         var data = snapshot.data;
-        print('Cheked Data firstOpen $data');
         if (data == false || data == null) {
           return Onboard();
         }

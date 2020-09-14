@@ -21,7 +21,6 @@ class _PomodoroState extends State<Pomodoro> {
   String btnLearn = 'Start';
 
   startTimer() {
-    print("start =====>>> $isTimerRunning");
     timeInMinutes = 25;
     int times = timeInMinutes * 60;
     double secPercent = (times / 100);
@@ -39,7 +38,6 @@ class _PomodoroState extends State<Pomodoro> {
     }
 
     timer = Timer.periodic(Duration(seconds: 1), (timer) {
-      print("checkTime $times");
       setState(() {
         if (times > 0) {
           isTimerRunning = !isTimerRunning;
@@ -74,6 +72,9 @@ class _PomodoroState extends State<Pomodoro> {
 
   @override
   Widget build(BuildContext context) {
+    final double screenWidth = MediaQuery.of(context).size.width;
+    final double screenHeigth = MediaQuery.of(context).size.height;
+
     return Scaffold(
       appBar: AppBar(
         title: Text('Pomdoro App'),
@@ -81,7 +82,7 @@ class _PomodoroState extends State<Pomodoro> {
       ),
       body: SafeArea(
         child: Container(
-          width: double.infinity,
+          width: screenWidth,
           decoration: BoxDecoration(
               gradient: LinearGradient(
                   colors: [kPrimaryLightColor, kPrimaryColor],
@@ -92,6 +93,7 @@ class _PomodoroState extends State<Pomodoro> {
             mainAxisAlignment: MainAxisAlignment.start,
             children: <Widget>[
               Container(
+                height: screenHeigth / 4,
                 padding: EdgeInsets.all(8),
                 child: CircularPercentIndicator(
                   reverse: true,
@@ -114,84 +116,24 @@ class _PomodoroState extends State<Pomodoro> {
               SizedBox(height: 5),
               Expanded(
                   child: Container(
-                width: double.infinity,
+                width: screenWidth,
                 decoration: BoxDecoration(
                     color: kPrimaryColor,
                     borderRadius: BorderRadius.only(
                         topLeft: Radius.circular(20),
                         topRight: Radius.circular(20))),
                 child: Padding(
-                  padding: EdgeInsets.all(30),
+                  padding: EdgeInsets.all(16),
                   child: Column(
                     children: <Widget>[
                       Expanded(
                         child: Row(
                           children: <Widget>[
                             Expanded(
-                              child: Column(
-                                children: <Widget>[
-                                  Text(
-                                    "Focus Time",
-                                    style: TextStyle(
-                                        color: kTextColor,
-                                        fontSize: 24,
-                                        fontWeight: FontWeight.w600),
-                                  ),
-                                  SizedBox(
-                                    height: 25,
-                                  ),
-                                  Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.center,
-                                      children: <Widget>[
-                                        Text(
-                                          "$timeInMinutes",
-                                          style: TextStyle(
-                                              fontSize: 70, color: kTextColor),
-                                        ),
-                                        SizedBox(
-                                          width: 5,
-                                        ),
-                                        Text("minutes",
-                                            style: TextStyle(
-                                                fontSize: 20,
-                                                color: kTextColor))
-                                      ])
-                                ],
-                              ),
+                              child: renderFocusTime(),
                             ),
                             Expanded(
-                              child: Column(
-                                children: <Widget>[
-                                  Text(
-                                    "Rest Time",
-                                    style: TextStyle(
-                                        color: kTextColor,
-                                        fontSize: 24,
-                                        fontWeight: FontWeight.w600),
-                                  ),
-                                  SizedBox(
-                                    height: 25,
-                                  ),
-                                  Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.center,
-                                      children: <Widget>[
-                                        Text(
-                                          "$pauseTime",
-                                          style: TextStyle(
-                                              fontSize: 70, color: kTextColor),
-                                        ),
-                                        SizedBox(
-                                          width: 5,
-                                        ),
-                                        Text("minutes",
-                                            style: TextStyle(
-                                                fontSize: 20,
-                                                color: kTextColor))
-                                      ])
-                                ],
-                              ),
+                              child: renderRestTime(),
                             ),
                           ],
                         ),
@@ -199,25 +141,7 @@ class _PomodoroState extends State<Pomodoro> {
                       SizedBox(
                         height: 5,
                       ),
-                      Padding(
-                        padding: EdgeInsets.symmetric(vertical: 5),
-                        child: RaisedButton(
-                          child: Padding(
-                            padding: const EdgeInsets.all(15.0),
-                            child: Text(
-                              btnLearn,
-                              style: TextStyle(
-                                  color: Color(0xFFFBFBFF), fontSize: 20),
-                            ),
-                          ),
-                          color: Color(0xFFF55D3E),
-                          shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(100)),
-                          onPressed: () {
-                            startTimer();
-                          },
-                        ),
-                      )
+                      renderButton()
                     ],
                   ),
                 ),
@@ -225,6 +149,70 @@ class _PomodoroState extends State<Pomodoro> {
             ],
           ),
         ),
+      ),
+    );
+  }
+
+  Widget renderFocusTime() {
+    return Column(
+      children: <Widget>[
+        Text(
+          "Focus Time",
+          style: TextStyle(
+              color: kTextColor, fontSize: 24, fontWeight: FontWeight.w600),
+        ),
+        Row(mainAxisAlignment: MainAxisAlignment.center, children: <Widget>[
+          Text(
+            "$timeInMinutes",
+            style: TextStyle(fontSize: 70, color: kTextColor),
+          ),
+          SizedBox(
+            width: 5,
+          ),
+          Text("minutes", style: TextStyle(fontSize: 20, color: kTextColor))
+        ])
+      ],
+    );
+  }
+
+  Widget renderRestTime() {
+    return Column(
+      children: <Widget>[
+        Text(
+          "Rest Time",
+          style: TextStyle(
+              color: kTextColor, fontSize: 24, fontWeight: FontWeight.w600),
+        ),
+        Row(mainAxisAlignment: MainAxisAlignment.center, children: <Widget>[
+          Text(
+            "$pauseTime",
+            style: TextStyle(fontSize: 70, color: kTextColor),
+          ),
+          SizedBox(
+            width: 5,
+          ),
+          Text("minutes", style: TextStyle(fontSize: 20, color: kTextColor))
+        ])
+      ],
+    );
+  }
+
+  Widget renderButton() {
+    return Padding(
+      padding: EdgeInsets.symmetric(vertical: 8),
+      child: RaisedButton(
+        child: Padding(
+          padding: const EdgeInsets.all(15.0),
+          child: Text(
+            btnLearn,
+            style: TextStyle(color: Color(0xFFFBFBFF), fontSize: 20),
+          ),
+        ),
+        color: Color(0xFFF55D3E),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(100)),
+        onPressed: () {
+          startTimer();
+        },
       ),
     );
   }

@@ -27,20 +27,17 @@ class _HomeState extends State<Home> {
         actions: <Widget>[
           PopupMenuButton<String>(
             onSelected: (String val) async {
-              if (val == 'About me') {
-                var url = 'https://github.com/kharisma-wardhana';
-                if (await canLaunch(url)) {
-                  await launch(
-                    url,
-                    forceSafariVC: true,
-                    forceWebView: true,
-                    enableJavaScript: true,
-                  );
-                } else {
-                  throw 'Could not launch $url';
-                }
+              var url = 'https://github.com/kharisma-wardhana';
+              if (await canLaunch(url)) {
+                await launch(
+                  url,
+                  forceSafariVC: true,
+                  forceWebView: true,
+                  enableJavaScript: true,
+                );
+              } else {
+                throw 'Could not launch $url';
               }
-              return print('Infoo');
             },
             icon: Icon(Icons.info),
             itemBuilder: (BuildContext context) {

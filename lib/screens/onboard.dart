@@ -88,7 +88,6 @@ class _OnboardState extends State<Onboard> {
                   ),
                   FlatButton(
                     onPressed: () {
-                      print("this is slideIndex: $slideIndex");
                       pageController.animateToPage(slideIndex + 1,
                           duration: Duration(milliseconds: 500),
                           curve: Curves.linear);
@@ -105,7 +104,6 @@ class _OnboardState extends State<Onboard> {
             )
           : InkWell(
               onTap: () {
-                print("Get Started Now");
                 Future<bool> saveFirstOpen = _savePref();
                 saveFirstOpen.then((value) {
                   if (value) {
