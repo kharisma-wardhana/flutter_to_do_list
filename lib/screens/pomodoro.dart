@@ -6,13 +6,16 @@ import 'package:percent_indicator/circular_percent_indicator.dart';
 import 'package:wakelock/wakelock.dart';
 
 class Pomodoro extends StatefulWidget {
+  final String taskTitle;
+  Pomodoro({Key key, this.taskTitle}) : super(key: key);
+
   @override
   _PomodoroState createState() => _PomodoroState();
 }
 
 class _PomodoroState extends State<Pomodoro> {
-  double currPercent = 1;
   static int timeInMinutes = 25;
+  double currPercent = 1;
   int seconds = timeInMinutes * 60;
   int pauseTime = 5;
   Color progressColor = kSecondaryColor;
@@ -93,14 +96,14 @@ class _PomodoroState extends State<Pomodoro> {
             mainAxisAlignment: MainAxisAlignment.start,
             children: <Widget>[
               Container(
-                height: screenHeigth / 4,
-                padding: EdgeInsets.all(8),
+                height: screenHeigth / 2,
                 child: CircularPercentIndicator(
                   reverse: true,
                   circularStrokeCap: CircularStrokeCap.round,
                   percent: currPercent,
                   animateFromLastPercent: true,
                   animation: true,
+                  animationDuration: 300,
                   radius: 360,
                   lineWidth: 30,
                   progressColor: progressColor,
@@ -113,7 +116,7 @@ class _PomodoroState extends State<Pomodoro> {
                   ),
                 ),
               ),
-              SizedBox(height: 5),
+              SizedBox(height: screenHeigth / 30),
               Expanded(
                   child: Container(
                 width: screenWidth,
@@ -124,25 +127,39 @@ class _PomodoroState extends State<Pomodoro> {
                         topRight: Radius.circular(20))),
                 child: Padding(
                   padding: EdgeInsets.all(16),
-                  child: Column(
-                    children: <Widget>[
-                      Expanded(
-                        child: Row(
+                  child: Expanded(
+                    child: Column(
+                      children: <Widget>[
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
                           children: <Widget>[
-                            Expanded(
-                              child: renderFocusTime(),
-                            ),
-                            Expanded(
-                              child: renderRestTime(),
-                            ),
+                            Text(
+                              widget.taskTitle,
+                              style: TextStyle(color: kTextColor, fontSize: 20),
+                            )
                           ],
                         ),
-                      ),
-                      SizedBox(
-                        height: 5,
-                      ),
-                      renderButton()
-                    ],
+                        SizedBox(
+                          height: screenHeigth / 50,
+                        ),
+                        Expanded(
+                          child: Row(
+                            children: <Widget>[
+                              Expanded(
+                                child: renderFocusTime(),
+                              ),
+                              Expanded(
+                                child: renderRestTime(),
+                              ),
+                            ],
+                          ),
+                        ),
+                        SizedBox(
+                          height: screenHeigth / 50,
+                        ),
+                        renderButton()
+                      ],
+                    ),
                   ),
                 ),
               ))
@@ -202,13 +219,13 @@ class _PomodoroState extends State<Pomodoro> {
       padding: EdgeInsets.symmetric(vertical: 8),
       child: RaisedButton(
         child: Padding(
-          padding: const EdgeInsets.all(15.0),
+          padding: const EdgeInsets.all(16),
           child: Text(
             btnLearn,
             style: TextStyle(color: Color(0xFFFBFBFF), fontSize: 20),
           ),
         ),
-        color: Color(0xFFF55D3E),
+        color: kSecondaryColor,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(100)),
         onPressed: () {
           startTimer();

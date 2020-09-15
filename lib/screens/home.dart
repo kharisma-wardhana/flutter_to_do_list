@@ -101,7 +101,9 @@ class _HomeState extends State<Home> {
                   onTap: () {
                     Navigator.push(context,
                         MaterialPageRoute(builder: (context) {
-                      return Pomodoro();
+                      return Pomodoro(
+                        taskTitle: ds.data()['title'],
+                      );
                     }));
                   },
                   onLongPress: () {
@@ -124,12 +126,14 @@ class _HomeState extends State<Home> {
       title: Text('Add Task'),
       titleTextStyle: TextStyle(color: kTextColor, fontSize: 25),
       content: TextField(
+        maxLength: 30,
         onChanged: (String value) {
           taskTitle = value;
         },
         cursorColor: kTextColor,
         style: TextStyle(color: kTextColor, decorationColor: kTextColor),
         decoration: InputDecoration(
+            counterStyle: TextStyle(color: kTextColor),
             enabledBorder:
                 UnderlineInputBorder(borderSide: BorderSide(color: kTextColor)),
             focusedBorder: UnderlineInputBorder(
@@ -179,6 +183,7 @@ class _HomeState extends State<Home> {
       title: Text('Edit Task'),
       titleTextStyle: TextStyle(color: kTextColor, fontSize: 25),
       content: TextField(
+        maxLength: 30,
         controller: editTask,
         onChanged: (String value) {
           taskTitle = value;
@@ -186,6 +191,7 @@ class _HomeState extends State<Home> {
         cursorColor: kTextColor,
         style: TextStyle(color: kTextColor, decorationColor: kTextColor),
         decoration: InputDecoration(
+            counterStyle: TextStyle(color: kTextColor),
             enabledBorder:
                 UnderlineInputBorder(borderSide: BorderSide(color: kTextColor)),
             focusedBorder: UnderlineInputBorder(
